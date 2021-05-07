@@ -6,8 +6,8 @@ export default async function handle(
   res: NextApiResponse
 ) {
   if (req.method === "GET") {
-    const resultPosts = await prisma.formaPagamento.findMany();
-    res.send(resultPosts);
+    const result = await prisma.formaPagamento.findMany();
+    res.send(result);
   } else if (req.method === "POST") {
     const { data } = req.body;
     const resultPosts = await prisma.formaPagamento.create({

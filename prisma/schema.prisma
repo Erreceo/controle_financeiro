@@ -8,9 +8,31 @@ datasource db {
 }
 
 model FormaPagamento {
-  id    Int     @id @default(autoincrement())
-  forma_pagamento String  @unique
-  dia_consolidacao Int
-  @@map(name: "forma_pagamento")
+      id    Int     @id @default(autoincrement())
+      forma_pagamento String  @unique
+      dia_consolidacao Int
+      @@map(name: "forma_pagamento")
 }
 
+model Categoria {
+    id Int @id  @default(autoincrement())
+    nome String @unique
+    @@map(name: "categoria")
+}
+
+model SubCategoria {
+    id Int @default(autoincrement())
+    nome String
+    categoria Categoria @relation(fields: [categoria], references:[id])
+    @@map(name: "sub_categoria")
+}
+
+model Compras {
+    id Int @id @default(autoincrement())
+    data_compra Date
+    forma_pagamento FormaPagamento @relation(fields: [forma_pagamento], references: [id])
+    nome String
+    valor Double
+    detalhamento String
+    sub_categoria SubCategoria @realation(fields: [sub_categoria], references: [id])
+}
