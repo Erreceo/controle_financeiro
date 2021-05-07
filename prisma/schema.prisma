@@ -11,28 +11,34 @@ model FormaPagamento {
       id    Int     @id @default(autoincrement())
       forma_pagamento String  @unique
       dia_consolidacao Int
+      compras Compras?
       @@map(name: "forma_pagamento")
 }
 
 model Categoria {
     id Int @id  @default(autoincrement())
     nome String @unique
+    subCategoria SubCategoria?
     @@map(name: "categoria")
 }
 
 model SubCategoria {
-    id Int @default(autoincrement())
+    id Int @id @default(autoincrement())
     nome String
-    categoria Categoria @relation(fields: [categoria], references:[id])
+    Categoria Categoria @relation(fields: [categoriaId], references:[id])
+    categoriaId Int @map("categoria")
+    compras Compras?
     @@map(name: "sub_categoria")
 }
 
 model Compras {
     id Int @id @default(autoincrement())
-    data_compra Date
-    forma_pagamento FormaPagamento @relation(fields: [forma_pagamento], references: [id])
+    data_compra DateTime
+    FormaPagamento FormaPagamento @relation(fields: [forma_pagamento], references: [id])
+    forma_pagamento Int
     nome String
-    valor Double
+    valor Decimal
     detalhamento String
-    sub_categoria SubCategoria @realation(fields: [sub_categoria], references: [id])
+    SubCategoria SubCategoria @relation(fields: [sub_categoria], references: [id])
+    sub_categoria Int
 }
