@@ -1,0 +1,16 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://usr_gep_dev:password@localhost:3306/controle_financeiro"
+}
+
+model FormaPagamento {
+  id    Int     @id @default(autoincrement())
+  forma_pagamento String  @unique
+  dia_consolidacao Int
+  @@map(name: "forma_pagamento")
+}
+
