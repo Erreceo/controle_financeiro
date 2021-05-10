@@ -12,6 +12,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@material-ui/core": "^4.11.4",
     "@prisma/client": "2.21.2",
     "next": "^10.0.0",
     "react": "^17.0.0",
